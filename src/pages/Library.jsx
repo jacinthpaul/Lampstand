@@ -8,7 +8,7 @@ const ALL_APPS = [
   { id: 'chat', label: 'Character Chat', desc: 'Chat with Moses, David, Paul, and others.', color: '#4A3A6B', status: 'soon', path: null, icon: (s) => <ChatIcon size={s} stroke="#E4DCF0" /> },
   { id: 'sermon', label: 'Sermon Builder', desc: 'Generate sermon outlines from any topic.', color: '#6F2F33', status: 'soon', path: null, icon: () => <span style={{ fontSize: 20 }}>📖</span> },
   { id: 'group', label: 'Group Facilitator', desc: 'Create discussion questions from study guides.', color: '#5A3A2E', status: 'soon', path: null, icon: () => <span style={{ fontSize: 20 }}>👥</span> },
-  { id: 'memory', label: 'Memory Coach', desc: 'Spaced repetition for verse memorization.', color: '#3A5A6B', status: 'soon', path: null, icon: () => <span style={{ fontSize: 20 }}>🧠</span> },
+  { id: 'memory', label: 'Memory Coach', desc: 'Spaced repetition for verse memorization.', color: '#3A5A6B', status: 'live', path: '/app/memory', icon: () => <span style={{ fontSize: 20 }}>🧠</span> },
   { id: 'places', label: 'Places Explorer', desc: 'Google Maps for biblical locations.', color: '#4A6B3A', status: 'soon', path: null, icon: () => <span style={{ fontSize: 20 }}>🗺️</span> },
   { id: 'plans', label: 'Reading Plans', desc: 'AI-generated reading plans for any goal.', color: '#6B5A3A', status: 'soon', path: null, icon: () => <span style={{ fontSize: 20 }}>📅</span> },
   { id: 'quiz', label: 'Question Bank', desc: 'Kahoot-style quizzes for Sunday school.', color: '#3A3A6B', status: 'soon', path: null, icon: () => <span style={{ fontSize: 20 }}>❓</span> },
@@ -26,7 +26,7 @@ export default function Library() {
         12 lamps, one stand
       </div>
       <div style={{ fontSize: 16, color: '#6E5F4A', marginBottom: 30 }}>
-        Ship 2 now; the system absorbs the rest with no redesign.
+        Live tools work today; the rest arrive with no redesign.
       </div>
 
       <div style={{ display: 'flex', gap: 12, marginBottom: 24 }}>

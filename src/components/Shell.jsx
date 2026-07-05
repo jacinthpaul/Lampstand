@@ -5,6 +5,7 @@ import { FlameIcon, HomeIcon, LibraryIcon, SearchIcon, UserIcon, TimelineIcon, B
 const APPS = [
   { id: 'study', label: 'Study Companion', path: '/app/study', color: '#2E5A57', icon: (s) => <BookIcon size={s} stroke="#DCEDEA" /> },
   { id: 'timeline', label: 'Timeline Explorer', path: '/app/timeline', color: '#3C5A2E', icon: (s) => <TimelineIcon size={s} stroke="#E2EBD6" /> },
+  { id: 'memory', label: 'Memory Coach', path: '/app/memory', color: '#3A5A6B', icon: (s) => <span style={{ fontSize: s }}>🧠</span> },
 ]
 
 export default function Shell() {

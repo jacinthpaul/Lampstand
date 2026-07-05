@@ -14,6 +14,11 @@ const TOOLS = [
     icon: (s) => <TimelineIcon size={s} stroke="#E2EBD6" />,
   },
   {
+    id: 'memory', label: 'Memory Coach', desc: 'Memorize verses with spaced repetition.',
+    color: '#3A5A6B', status: 'live', path: '/app/memory',
+    icon: () => <span style={{ fontSize: 22 }}>🧠</span>,
+  },
+  {
     id: 'journey', label: 'Journey Planner', desc: 'Walk the routes of Scripture.',
     color: '#7A5A1F', status: 'soon', path: null,
     icon: (s) => <MapPinIcon size={s} stroke="#F0E2C2" />,

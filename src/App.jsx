@@ -4,6 +4,7 @@ import Hub from './pages/Hub'
 import Study from './pages/Study'
 import Timeline from './pages/Timeline'
 import Library from './pages/Library'
+import Memory from './pages/Memory'
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
           <Route path="/app/study/:reference" element={<Study />} />
           <Route path="/app/timeline" element={<Timeline />} />
           <Route path="/app/timeline/:eventId" element={<Timeline />} />
+          <Route path="/app/memory" element={<Memory />} />
         </Route>
       </Routes>
     </BrowserRouter>
