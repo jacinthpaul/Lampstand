@@ -47,6 +47,14 @@ export function ChatIcon({ size = 24, stroke = '#E4DCF0' }) {
   )
 }
 
+export function BookmarkIcon({ size = 18, stroke = '#A9792A', filled = false }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={filled ? stroke : 'none'} stroke={stroke} strokeWidth="1.7">
+      <path d="M6 4h12v16l-6-4-6 4z" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
 export function SearchIcon({ size = 18, stroke = '#A9792A' }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="2">

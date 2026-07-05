@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { VERSE_DATA, RECENT_VERSES, SAVED_VERSES, SAMPLE_CHAT } from '../data/verses'
-import { SearchIcon, ArrowRightIcon, BookIcon, FlameIcon } from '../components/Icons'
+import { VERSE_DATA, SAMPLE_CHAT } from '../data/verses'
+import { SearchIcon, ArrowRightIcon, BookIcon, FlameIcon, BookmarkIcon } from '../components/Icons'
+import { useVerseLibrary } from '../lib/useVerseLibrary'
 
 const LENS_LABELS = {
   meaning: 'Meaning',
@@ -20,6 +21,7 @@ export default function Study() {
   const [messages, setMessages] = useState([])
   const [isThinking, setIsThinking] = useState(false)
   const chatEndRef = useRef(null)
+  const { recent, saved, addRecent, isSaved, toggleSaved } = useVerseLibrary()
 
   const currentRef = reference || 'Romans 8:28'
   const verse = VERSE_DATA[currentRef] || VERSE_DATA['Romans 8:28']
@@ -29,7 +31,8 @@ export default function Study() {
     const seed = SAMPLE_CHAT[currentRef]
     setMessages(seed || [])
     setActiveLens('meaning')
-  }, [currentRef])
+    if (VERSE_DATA[currentRef]) addRecent(currentRef)
+  }, [currentRef, addRecent])
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -85,7 +88,7 @@ export default function Study() {
 
         <div className="eyebrow" style={{ color: '#9C8862', marginBottom: 10 }}>Recent</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-          {RECENT_VERSES.map(ref => (
+          {recent.map(ref => (
             <button
               key={ref}
               onClick={() => navigate(`/app/study/${encodeURIComponent(ref)}`)}
@@ -103,8 +106,13 @@ export default function Study() {
         </div>
 
         <div className="eyebrow" style={{ color: '#9C8862', margin: '22px 0 10px' }}>Saved</div>
+        {saved.length === 0 && (
+          <div className="font-ui" style={{ fontSize: 13, color: '#8A7B62', lineHeight: 1.5, padding: '0 12px' }}>
+            Tap the bookmark on any verse to save it here.
+          </div>
+        )}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-          {SAVED_VERSES.map(ref => (
+          {saved.map(ref => (
             <button
               key={ref}
               onClick={() => navigate(`/app/study/${encodeURIComponent(ref)}`)}
@@ -164,7 +172,25 @@ export default function Study() {
         <div style={{ flex: 1, overflowY: 'auto', padding: '40px 48px' }}>
           {verse ? (
             <>
-              <div className="eyebrow">{verse.book} {verse.chapter} · Verse {verse.verse}</div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 16 }}>
+                <div className="eyebrow">{verse.book} {verse.chapter} · Verse {verse.verse}</div>
+                <button
+                  onClick={() => toggleSaved(verse.reference)}
+                  className="font-ui"
+                  title={isSaved(verse.reference) ? 'Remove from saved' : 'Save this verse'}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0,
+                    background: isSaved(verse.reference) ? '#6F2F33' : '#fff',
+                    color: isSaved(verse.reference) ? '#F6EEDB' : '#6E5F4A',
+                    border: isSaved(verse.reference) ? 'none' : '1px solid #E3D6BE',
+                    borderRadius: 20, padding: '7px 14px', fontSize: 13, fontWeight: 600,
+                    cursor: 'pointer',
+                  }}
+                >
+                  <BookmarkIcon size={15} filled={isSaved(verse.reference)} stroke={isSaved(verse.reference) ? '#F6EEDB' : '#A9792A'} />
+                  {isSaved(verse.reference) ? 'Saved' : 'Save'}
+                </button>
+              </div>
               <div className="font-display" style={{
                 fontWeight: 600, fontSize: 34, lineHeight: 1.32,
                 marginTop: 16, color: '#2B2218',
