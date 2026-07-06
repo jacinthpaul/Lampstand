@@ -7,8 +7,12 @@ import Library from './pages/Library'
 import Memory from './pages/Memory'
 
 export default function App() {
+  // BASE_URL is '/Lampstand/' in the Pages build, '/' in dev; React Router
+  // wants the basename without a trailing slash.
+  const basename = import.meta.env.BASE_URL.replace(/\/$/, '')
+
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <Routes>
         <Route element={<Shell />}>
           <Route index element={<Hub />} />
