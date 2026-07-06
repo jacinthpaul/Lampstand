@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { BookIcon, TimelineIcon, MapPinIcon, ChatIcon, FlameIcon } from '../components/Icons'
+import { useVerseLibrary } from '../lib/useVerseLibrary'
 
 const TOOLS = [
   {
@@ -11,6 +12,11 @@ const TOOLS = [
     id: 'timeline', label: 'Timeline Explorer', desc: "See Scripture's whole story in order.",
     color: '#3C5A2E', status: 'live', path: '/app/timeline',
     icon: (s) => <TimelineIcon size={s} stroke="#E2EBD6" />,
+  },
+  {
+    id: 'memory', label: 'Memory Coach', desc: 'Memorize verses with spaced repetition.',
+    color: '#3A5A6B', status: 'live', path: '/app/memory',
+    icon: () => <span style={{ fontSize: 22 }}>🧠</span>,
   },
   {
     id: 'journey', label: 'Journey Planner', desc: 'Walk the routes of Scripture.',
@@ -26,6 +32,7 @@ const TOOLS = [
 
 export default function Hub() {
   const navigate = useNavigate()
+  const { recent } = useVerseLibrary()
   const today = new Date().toLocaleDateString('en-US', { weekday: 'long' })
 
   return (
@@ -112,7 +119,7 @@ export default function Hub() {
       <section style={{ padding: '0 32px 48px' }}>
         <div className="font-display" style={{ fontWeight: 600, fontSize: 22, marginBottom: 14 }}>Recent study</div>
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-          {['Romans 8:28', 'Psalm 23:1', 'John 3:16', 'Philippians 4:6', 'Matthew 5:14'].map(ref => (
+          {recent.slice(0, 6).map(ref => (
             <button
               key={ref}
               onClick={() => navigate(`/app/study/${ref}`)}

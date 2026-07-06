@@ -4,10 +4,15 @@ import Hub from './pages/Hub'
 import Study from './pages/Study'
 import Timeline from './pages/Timeline'
 import Library from './pages/Library'
+import Memory from './pages/Memory'
 
 export default function App() {
+  // BASE_URL is '/Lampstand/' in the Pages build, '/' in dev; React Router
+  // wants the basename without a trailing slash.
+  const basename = import.meta.env.BASE_URL.replace(/\/$/, '')
+
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <Routes>
         <Route element={<Shell />}>
           <Route index element={<Hub />} />
@@ -16,6 +21,7 @@ export default function App() {
           <Route path="/app/study/:reference" element={<Study />} />
           <Route path="/app/timeline" element={<Timeline />} />
           <Route path="/app/timeline/:eventId" element={<Timeline />} />
+          <Route path="/app/memory" element={<Memory />} />
         </Route>
       </Routes>
     </BrowserRouter>
